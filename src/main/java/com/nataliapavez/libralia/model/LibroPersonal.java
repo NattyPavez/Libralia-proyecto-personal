@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class LibroPersonal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String titulo;
     private String autor;
@@ -89,7 +89,7 @@ public class LibroPersonal {
 // getters y setters
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public String getDescripcionGoogle() {
@@ -109,11 +109,11 @@ public class LibroPersonal {
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        id = id;
     }
 
     public void setCalificacionPersonal(Double calificacionPersonal) {
@@ -187,6 +187,7 @@ public class LibroPersonal {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
 }
 
 

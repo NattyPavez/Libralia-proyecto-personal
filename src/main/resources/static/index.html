@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Libralia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>📚 Bienvenida a Libralia</h1>
+<p>Estos son tus libros:</p>
+<ul id="lista-libros"></ul>
+
+<script>
+    fetch("http://localhost:8081/libros")
+        .then(response => response.json())
+        .then(libros => {
+            const ul = document.getElementById("lista-libros");
+            ul.innerHTML = ""; // limpia por si acaso
+            libros.forEach(libro => {
+                const li = document.createElement("li");
+                li.textContent = libro.titulo + " - " + libro.autor;
+                ul.appendChild(li);
+            });
+        })
+        .catch(error => console.error("Error al cargar libros:", error));
+</script>
+</body>
+
+</html>

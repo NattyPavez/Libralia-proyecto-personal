@@ -10,11 +10,10 @@ import com.nataliapavez.libralia.model.Usuario;
 import com.nataliapavez.libralia.repository.LibroPersonalRepository;
 import com.nataliapavez.libralia.repository.UsuarioRepository;
 import com.nataliapavez.libralia.service.ConversorLibroService;
-import org.hibernate.sql.results.graph.basic.CoercingResultAssembler;
 import org.springframework.stereotype.Component;
 import jakarta.transaction.Transactional;
 
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -370,6 +369,7 @@ public class Principal {
 
     }
 
+    //metodo para editar puntuacion y reseñas personales
     private void agregarPuntuacionYReseniaALeidos(Usuario usuario) {
         //filtrar solo libros leídos
         List<LibroPersonal> leidos = usuario.getLibros().stream()
@@ -381,12 +381,12 @@ public class Principal {
             return;
         }
         // mostrar lista enumerada
-        System.out.println("Libros Leídos: ");
+        System.out.println("Libros Leídos: \n");
         for (int i = 0; i < leidos.size(); i++) {
             System.out.printf("%d. %s%n", i + 1, leidos.get(i).getTituloConAutor());
         }
 
-        System.out.println("Ingresa el número del libro que deseas calificar");
+        System.out.println("\nIngresa el número del libro que deseas calificar");
         int seleccion;
         try {
             seleccion = Integer.parseInt(teclado.nextLine()) - 1;
@@ -437,6 +437,7 @@ public class Principal {
         usuarioRepositorio.save(usuario);
     }
 
+    //metodo para mostrar libros mejor evaluados por los usuarios de Libralia
     private void top5MejoresEvaluadosLibralia() {
         System.out.println("TOP 5 de Usuarios Libralia");
 

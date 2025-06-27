@@ -23,6 +23,9 @@ public class Usuario {
 
     private String enlaces;
 
+    private String avatarUrl = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<LibroPersonal> libros = new ArrayList<>();
 
@@ -35,6 +38,7 @@ public class Usuario {
         this.edad = (edad > 0 && edad < 100) ? edad : 0;
         this.descripcion = Optional.ofNullable(descripcion).filter(s -> !s.isBlank()).orElse(null);
         this.enlaces = Optional.ofNullable(enlaces).filter(s -> !s.isBlank()).orElse(null);
+
     }
 
     // Constructor vacío
@@ -62,6 +66,7 @@ public class Usuario {
         System.out.println("---------------------");
         System.out.println("PERFIL DE USUARIO");
         System.out.println("---------------------");
+        System.out.println("Avatar: " +  this.avatarUrl);
         System.out.println("Usuario: " + nombreUsuario);
         System.out.println("Edad: " + edad + " años");
         System.out.println("Sobre mí: " + (descripcion != null ? descripcion : "Sin descripción por el momento"));
@@ -176,6 +181,17 @@ public class Usuario {
 
     public List<LibroPersonal> getLibros() {
         return libros;
+    }
+
+    public String getAvatarUrl() {
+        return (avatarUrl != null && !avatarUrl.isBlank())
+                ? avatarUrl
+                : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = (avatarUrl != null && !avatarUrl.isBlank())
+                ? avatarUrl : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
     }
 
 }

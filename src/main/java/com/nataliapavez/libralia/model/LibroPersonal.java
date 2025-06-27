@@ -34,10 +34,15 @@ public class LibroPersonal {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "Libro_Libralia_id")
+    private LibroLibraliaDB libroLibralia;
+
     //constructor con validaciones
     public LibroPersonal(String titulo, String autor, String genero, String descripcionGoogle,
                          String urlPortada, int anioDePublicacion, String reseniaPersonal,
-                         Double calificacionGoogle, Double calificacionPersonal, EstadoLectura estadoLectura) {
+                         Double calificacionGoogle, Double calificacionPersonal,
+                         EstadoLectura estadoLectura, LibroLibraliaDB libroLibralia) {
         this.titulo = (titulo == null || titulo.isBlank()) ? "Titulo desconocido" : titulo;
         this.autor = (autor == null || autor.isBlank()) ? "Autor desconocido" : autor;
         this.genero = genero != null ? genero : "Género no especificado";
@@ -48,6 +53,7 @@ public class LibroPersonal {
         this.calificacionGoogle = (calificacionGoogle != null && calificacionGoogle >= 0 && calificacionGoogle <= 5) ? calificacionGoogle : 0.0;
         this.calificacionPersonal = calificacionPersonal;
         this.estadoLectura = estadoLectura != null ? estadoLectura : EstadoLectura.POR_LEER;
+        this.libroLibralia = libroLibralia;
     }
 
     public LibroPersonal() {

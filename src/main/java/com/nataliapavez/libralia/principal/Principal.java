@@ -5,8 +5,10 @@ import com.nataliapavez.libralia.dto.ImageLinks;
 import com.nataliapavez.libralia.dto.ResultadoGoogle;
 import com.nataliapavez.libralia.dto.VolumeInfo;
 import com.nataliapavez.libralia.model.EstadoLectura;
+import com.nataliapavez.libralia.model.LibroLibraliaDB;
 import com.nataliapavez.libralia.model.LibroPersonal;
 import com.nataliapavez.libralia.model.Usuario;
+import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
 import com.nataliapavez.libralia.repository.LibroPersonalRepository;
 import com.nataliapavez.libralia.repository.UsuarioRepository;
 import com.nataliapavez.libralia.service.ConversorLibroService;
@@ -28,10 +30,14 @@ public class Principal {
 
     private final UsuarioRepository usuarioRepositorio;
     private final LibroPersonalRepository libroPersonalRepositorio;
+    private final LibroLibraliaDBRepository libroLibraliaDBRepositorio;
 
-    public Principal(UsuarioRepository usuarioRepository, LibroPersonalRepository libroPersonalRepository) {
+    public Principal(UsuarioRepository usuarioRepository,
+                     LibroPersonalRepository libroPersonalRepository,
+                     LibroLibraliaDBRepository libroLibraliaDBRepository) {
         this.usuarioRepositorio = usuarioRepository;
         this.libroPersonalRepositorio = libroPersonalRepository;
+        this.libroLibraliaDBRepositorio = libroLibraliaDBRepository;
     }
 
     @Transactional
@@ -195,18 +201,21 @@ public class Principal {
 
         if (!libros.isEmpty()) {
             for (LibroPersonal libro : libros) {
-                libro.setEstadoLectura(estadoSeleccionado);
                 usuario.agregarLibro(libro);
             }
         }
-
-        usuarioRepositorio.save(usuario);
 
         switch (estadoSeleccionado) {
             case LEIDO -> System.out.println("Libros agregados a tu biblioteca de leídos.");
             case POR_LEER -> System.out.println("Libros agregados a tu lista de deseos (por leer).");
             case LEYENDO -> System.out.println("Libro(s) agregados a tu escritorio abierto.");
         }
+
+        // Guardar el usuario actualizado si ya existe en base de datos
+        if (usuario.getId() != null) {
+            usuarioRepositorio.save(usuario);
+        }
+
     }
 
 
@@ -325,7 +334,22 @@ public class Principal {
                             Double calificacionGoogle = (seleccionado.getAverageRating() != null)
                                     ? seleccionado.getAverageRating()
                                     : 0.0;
-
+                            // Buscar si ya existe en la base de datos el libro general
+                            LibroLibraliaDB libroExistenteEnDB = libroLibraliaDBRepositorio
+                                    .findByTituloIgnoreCaseAndAutorIgnoreCase(titulo, autor)
+                                    .orElseGet(() -> {
+                                        //si no existe crearlo y guardarlo
+                                        LibroLibraliaDB nuevoLibro = new LibroLibraliaDB();
+                                        nuevoLibro.setTitulo(titulo);
+                                        nuevoLibro.setAutor(autor);
+                                        nuevoLibro.setGenero(genero);
+                                        nuevoLibro.setDescripcion(descripcionGoogle);
+                                        nuevoLibro.setUrlPortada(urlPortada);
+                                        nuevoLibro.setAnioDePublicacion(aniopublicacion);
+                                        nuevoLibro.setCalificacionGoogle(calificacionGoogle);
+                                        return libroLibraliaDBRepositorio.save(nuevoLibro);
+                                    });
+                            // Crear libro personal y vincularlo al libro general en DB
                             return new LibroPersonal(
                                     titulo,
                                     autor,
@@ -336,7 +360,8 @@ public class Principal {
                                     "Sin reseña por el momento",
                                     calificacionGoogle,
                                     null,
-                                    estadoLectura
+                                    estadoLectura,
+                                    libroExistenteEnDB
                             );
                         } else {
                             System.out.println("Número fuera de rango: " + idx);

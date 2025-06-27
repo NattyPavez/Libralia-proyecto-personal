@@ -1,30 +1,33 @@
-//package com.nataliapavez.libralia;
-//
-//import com.nataliapavez.libralia.principal.Principal;
-//import com.nataliapavez.libralia.repository.LibroPersonalRepository;
-//import com.nataliapavez.libralia.repository.UsuarioRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.boot.SpringApplication;
-//import org.springframework.boot.autoconfigure.SpringBootApplication;
-//
-//@SpringBootApplication
-//public class LibraliaApplication implements CommandLineRunner {
-//	@Autowired
-//	private UsuarioRepository usuarioRepository;
-//	@Autowired
-//	private LibroPersonalRepository libroPersonalRepository;
-//
-//    public static void main(String[] args) {
-//		SpringApplication.run(LibraliaApplication.class, args);
-//	}
-//
-//	@Override
-//	public void run(String... args) throws Exception {
-//		Principal principal = new Principal(usuarioRepository, libroPersonalRepository);
-//		principal.ejecutar();
-//	}
-//}
+package com.nataliapavez.libralia;
+
+import com.nataliapavez.libralia.principal.Principal;
+import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
+import com.nataliapavez.libralia.repository.LibroPersonalRepository;
+import com.nataliapavez.libralia.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LibraliaApplication implements CommandLineRunner {
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private LibroPersonalRepository libroPersonalRepository;
+    @Autowired
+    private LibroLibraliaDBRepository libroLibraliaDBRepository;
+
+    public static void main(String[] args) {
+		SpringApplication.run(LibraliaApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		Principal principal = new Principal(usuarioRepository, libroPersonalRepository, libroLibraliaDBRepository);
+		principal.ejecutar();
+	}
+}
 
 
 

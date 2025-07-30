@@ -1,20 +1,20 @@
-//package com.nataliapavez.libralia;
-//
-//import org.springframework.boot.SpringApplication;
-//import org.springframework.boot.autoconfigure.SpringBootApplication;
-//
-//@SpringBootApplication
-//public class LibraliaApplicationController {
-//
-//    public static void main(String[] args) {
-//
-//		SpringApplication.run(LibraliaApplicationController.class, args);
-//	}
-//}
-//
-//
-//
-//
+package com.nataliapavez.libralia;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LibraliaApplicationController {
+
+    public static void main(String[] args) {
+
+		SpringApplication.run(LibraliaApplicationController.class, args);
+	}
+}
+
+
+
+
 
 
 

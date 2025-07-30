@@ -9,8 +9,13 @@ public class LibroPersonal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "text")
     private String titulo;
+
+    @Column(columnDefinition = "text")
     private String autor;
+
+    @Column(columnDefinition = "text")
     private String genero;
 
     @Column(columnDefinition = "text")
@@ -59,6 +64,21 @@ public class LibroPersonal {
     public LibroPersonal() {
         // Constructor vacío requerido por JPA
     }
+
+    public LibroPersonal(LibroLibraliaDB libroBase, EstadoLectura estado) {
+        this.titulo = libroBase.getTitulo();
+        this.autor = libroBase.getAutor();
+        this.genero = libroBase.getGenero();
+        this.descripcionGoogle = libroBase.getDescripcion();
+        this.urlPortada = libroBase.getUrlPortada();
+        this.anioDePublicacion = libroBase.getAnioDePublicacion() != null ? libroBase.getAnioDePublicacion() : 0;
+        this.calificacionGoogle = libroBase.getCalificacionGoogle();
+        this.estadoLectura = estado;
+        this.libroLibralia = libroBase;
+        this.reseniaPersonal = "Sin reseña personal por el momento";
+        this.calificacionPersonal = 0.0;
+    }
+
 
 
     // metodo para mostrar titulo por autor

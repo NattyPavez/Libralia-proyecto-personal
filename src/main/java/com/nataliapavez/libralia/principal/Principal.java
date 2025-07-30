@@ -245,7 +245,8 @@ public class Principal {
         }
 
         List<VolumeInfo> listaOriginal = resultado.items().stream()
-                .map(item -> item.volumeInfo())
+                .map(item -> item.getVolumeInfo()
+                )
                 .filter(Objects::nonNull)
                 .toList();
 

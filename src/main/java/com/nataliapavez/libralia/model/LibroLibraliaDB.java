@@ -11,8 +11,13 @@ public class LibroLibraliaDB {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "text")
     private String titulo;
+
+    @Column(columnDefinition = "text")
     private String autor;
+
+    @Column(columnDefinition = "text")
     private String genero;
 
     @Column(columnDefinition = "text")

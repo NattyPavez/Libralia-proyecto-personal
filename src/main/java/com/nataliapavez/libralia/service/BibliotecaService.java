@@ -8,6 +8,7 @@ import com.nataliapavez.libralia.model.LibroPersonal;
 import com.nataliapavez.libralia.model.Usuario;
 import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
 import com.nataliapavez.libralia.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,8 @@ public class BibliotecaService {
             LibroGoogleDTO libroDTO = request.libro();
             System.out.println("CALIFICACION GOOGLE: " + libroDTO.calificacionGoogle());
 
-            EstadoLectura estado = EstadoLectura.valueOf(request.estadoLectura().toUpperCase());
+            EstadoLectura estado = request.estadoLectura();
+
 
             // Paso 1: Buscar o crear libro base (libroLibraliaDB)
             Optional<LibroLibraliaDB> existente = libroLibraliaDBRepository.findByTituloIgnoreCaseAndAutorIgnoreCase(

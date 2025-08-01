@@ -80,7 +80,6 @@ public class LibroPersonal {
     }
 
 
-
     // metodo para mostrar titulo por autor
     public String getTituloConAutor() {
         return titulo + " (" + autor + ").";

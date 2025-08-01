@@ -7,6 +7,6 @@ public record LibroBusquedaResponseDTO(
         String descripcion,
         String urlPortada,
         int anioPublicacion,
-        double calificacion
+        Double calificacion
 ) {
 }

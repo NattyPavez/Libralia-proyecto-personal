@@ -27,6 +27,8 @@ public class LibroLibraliaDB {
     private String urlPortada;
 
     private Integer anioDePublicacion;
+
+    @Column(nullable = true)
     private Double calificacionGoogle;
 
     @OneToMany(mappedBy = "libroLibralia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

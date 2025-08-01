@@ -6,6 +6,7 @@ import com.nataliapavez.libralia.dto.LibroGoogleDTO;
 import com.nataliapavez.libralia.dto.VolumeInfo;
 import com.nataliapavez.libralia.model.LibroPersonal;
 import com.nataliapavez.libralia.service.LibroBusquedaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class LibroBusquedaController {
     }
 
     @PostMapping("/buscar")
-    public ResponseEntity<?> buscarLibros(@RequestBody BuscarLibroRequestDTO request) {
+    public ResponseEntity<?> buscarLibros(@RequestBody @Valid BuscarLibroRequestDTO request) {
         try {
             List<LibroBusquedaResponseDTO> resultados = libroBusquedaService.buscarLibrosDesdeApi(request);
             if (resultados.isEmpty()) {

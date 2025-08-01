@@ -26,7 +26,6 @@ public class LibroBusquedaService {
 
     public List<LibroBusquedaResponseDTO> buscarLibrosDesdeApi(BuscarLibroRequestDTO request) throws IOException, InterruptedException {
         String textoBusqueda = request.textoBusqueda().trim();
-        EstadoLectura estadoLectura = EstadoLectura.valueOf(request.estadoLectura().toUpperCase());
 
         if (textoBusqueda.isEmpty()) {
             throw new IllegalArgumentException("La búsqueda no puede estar vacía");
@@ -75,7 +74,7 @@ public class LibroBusquedaService {
                         dto.descripcion(),
                         dto.urlPortada(),
                         dto.anioPublicacion(),
-                        dto.calificacionGoogle()))
+                        dto.calificacionGoogle() == null || dto.calificacionGoogle() == 0.0 ? null : dto.calificacionGoogle()))
                 .collect(Collectors.toList());
     }
 }

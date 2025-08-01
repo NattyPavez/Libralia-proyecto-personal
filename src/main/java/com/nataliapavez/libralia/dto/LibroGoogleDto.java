@@ -1,6 +1,9 @@
 package com.nataliapavez.libralia.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,13 +11,13 @@ import java.util.Optional;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public record LibroGoogleDTO(
-        String titulo,
-        String autor,
-        String descripcion,
-        String urlPortada,
-        String genero,
-        Integer anioPublicacion,
-        Double calificacionGoogle
+        @NotBlank String titulo,
+        @NotBlank String autor,
+        @NotBlank String descripcion,
+        @NotBlank String urlPortada,
+        @NotBlank String genero,
+        @NotNull Integer anioPublicacion,
+        @Nullable Double calificacionGoogle
 ) {
     public static LibroGoogleDTO desdeVolumeInfo(VolumeInfo info) {
         String titulo = Optional.ofNullable(info.getTitle()).orElse("Título desconocido");
@@ -46,7 +49,9 @@ public record LibroGoogleDTO(
                     }
                 }).orElse(0);
 
-        Double rating = Optional.ofNullable(info.getAverageRating()).orElse(0.0);
+        Double rating = Optional.ofNullable(info.getAverageRating())
+                .filter(r -> r != 0.0) // si es 0.0 también lo transformamos en null
+                .orElse(null);
 
         return new LibroGoogleDTO(titulo, autor, descripcion, urlPortada, genero, anio, rating);
     }

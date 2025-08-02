@@ -105,6 +105,39 @@ public class UsuarioService {
         libro.calificar(datos.calificacionPersonal());
     }
 
+    public UsuarioDTO obtenerUsuarioPublico(String username) {
+        Usuario usuario = usuarioRepositorio.findByNombreUsuario(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return new UsuarioDTO(usuario);
+    }
+
+    public BibliotecaUsuarioDTO obtenerBibliotecaPublica(String username) {
+        Usuario usuario = usuarioRepositorio.findByNombreUsuario(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return new BibliotecaUsuarioDTO(usuario);
+    }
+
+    @Transactional
+    public void eliminarLibroPorTitulo(String username, String titulo) {
+        Usuario usuario = usuarioRepositorio.findByNombreUsuario(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        List<LibroPersonal> librosDelUsuario = usuario.getLibros();
+
+        Optional<LibroPersonal> libroAEliminar = librosDelUsuario.stream()
+                .filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo))
+                .findFirst();
+
+        if (libroAEliminar.isPresent()) {
+            librosDelUsuario.remove(libroAEliminar.get());
+        } else {
+            throw new RuntimeException("Libro con ese título no encontrado en la biblioteca del usuario");
+        }
+    }
+
+
+
+
 
 
 }

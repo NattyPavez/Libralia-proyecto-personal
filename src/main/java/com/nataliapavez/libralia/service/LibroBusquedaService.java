@@ -6,6 +6,9 @@ import com.nataliapavez.libralia.model.EstadoLectura;
 import com.nataliapavez.libralia.model.LibroLibraliaDB;
 import com.nataliapavez.libralia.model.LibroPersonal;
 import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,7 +27,11 @@ public class LibroBusquedaService {
         this.libroLibraliaDBRepositorio = libroLibraliaDBRepositorio;
     }
 
-    public List<LibroBusquedaResponseDTO> buscarLibrosDesdeApi(BuscarLibroRequestDTO request) throws IOException, InterruptedException {
+    public Page<LibroBusquedaResponseDTO> buscarLibrosDesdeApi(BuscarLibroRequestDTO request, Pageable pageable) throws IOException, InterruptedException {
+        int page = pageable.getPageNumber();
+        int size = pageable.getPageSize();
+        int startIndex = page * size;
+
         String textoBusqueda = request.textoBusqueda().trim();
 
         if (textoBusqueda.isEmpty()) {
@@ -36,11 +43,15 @@ public class LibroBusquedaService {
         final String URL_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
         String busquedaFormateada = URLEncoder.encode(textoBusqueda, StandardCharsets.UTF_8);
 
-        String json = consumoApi.obtenerDatos(URL_BASE + busquedaFormateada);
+        String url = URL_BASE + busquedaFormateada +
+                "&startIndex=" + startIndex +
+                "&maxResults=" + size;
+
+        String json = consumoApi.obtenerDatos(url);
         ResultadoGoogle resultado = conversor.convertir(json, ResultadoGoogle.class);
 
         if (resultado.items() == null || resultado.items().isEmpty()) {
-            return Collections.emptyList();
+            return Page.empty();
         }
 
         List<LibroGoogleDTO> listaOriginal = resultado.items().stream()
@@ -63,10 +74,10 @@ public class LibroBusquedaService {
                 .toList();
 
         List<LibroGoogleDTO> listaFinal = Stream.concat(coincidenciasAltas.stream(), otrasSugerencias.stream())
-                .limit(10)
                 .toList();
 
-        return listaFinal.stream()
+
+        List<LibroBusquedaResponseDTO> respuesta = listaFinal.stream()
                 .map(dto -> new LibroBusquedaResponseDTO(
                         dto.titulo(),
                         dto.autor(),
@@ -75,6 +86,10 @@ public class LibroBusquedaService {
                         dto.urlPortada(),
                         dto.anioPublicacion(),
                         dto.calificacionGoogle() == null || dto.calificacionGoogle() == 0.0 ? null : dto.calificacionGoogle()))
-                .collect(Collectors.toList());
+                .toList();
+        long totalEstimado = 100;
+
+
+        return new PageImpl<>(respuesta, pageable, totalEstimado);
     }
 }

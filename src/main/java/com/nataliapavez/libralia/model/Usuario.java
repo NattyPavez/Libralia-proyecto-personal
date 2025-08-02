@@ -124,6 +124,13 @@ public class Usuario {
         return "";
     }
 
+    public List<LibroPersonal> getLibrosPorEstado(EstadoLectura estado) {
+        return libros.stream()
+                .filter(libro -> libro.getEstadoLectura() == estado)
+                .collect(Collectors.toList());
+    }
+
+
     @Override
     public String toString() {
         return "Perfil \n" + this.getNombreUsuario() + "\n" + this.getDescripcion();

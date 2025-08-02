@@ -20,6 +20,13 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
         this.usuarioRepository = usuarioRepository;
     }
+
+    @GetMapping("/perfil/{id}")
+    public PerfilDTO obtenerPerfil(@PathVariable Long id) {
+        return usuarioService.obtenerPerfil(id);
+    }
+
+
     @GetMapping("/usuarios")
     public List<UsuarioResumenDTO> listarUsuarios() {
         return usuarioRepository.findAll()
@@ -27,18 +34,18 @@ public class UsuarioController {
                 .map(u -> new UsuarioResumenDTO(u.getId(), u.getNombreUsuario(), u.getCorreo()))
                 .toList();
     }
-    @GetMapping("/perfil/{id}")
-    public PerfilDTO obtenerPerfil(@PathVariable Long id) {
-        return usuarioService.obtenerPerfil(id);
+
+    @GetMapping("/usuarios/{username}")
+    public UsuarioDTO obtenerUsuarioPublico(@PathVariable String username) {
+        return usuarioService.obtenerUsuarioPublico(username);
     }
 
+    @GetMapping("/usuarios/{username}/biblioteca")
+    public BibliotecaUsuarioDTO obtenerBibliotecaPublica(@PathVariable String username) {
+        return usuarioService.obtenerBibliotecaPublica(username);
+    }
 
     //insomnia probar con lana_talia_es
-    @GetMapping("/usuarios/{username}/biblioteca/leidos")
-    public List<LibroDTO> obtenerLibrosLeidos(@PathVariable String username) {
-        return usuarioService.obtenerLibrosLeidosDeUsuario(username);
-    }
-
     @GetMapping("/usuarios/{username}/biblioteca/por-leer")
     public List<LibroDTO> obtenerLibrosPorLeer(@PathVariable String username) {
         return usuarioService.obtenerLibrosPorLeerDeUsuario(username);
@@ -47,6 +54,11 @@ public class UsuarioController {
     @GetMapping("/usuarios/{username}/biblioteca/leyendo")
     public List<LibroDTO> obtenerLibrosAbiertos(@PathVariable String username) {
         return usuarioService.obtenerLibrosAbiertosDeUsuario(username);
+    }
+
+    @GetMapping("/usuarios/{username}/biblioteca/leidos")
+    public List<LibroDTO> obtenerLibrosLeidos(@PathVariable String username) {
+        return usuarioService.obtenerLibrosLeidosDeUsuario(username);
     }
 
     @GetMapping("/usuarios/{username}/biblioteca/leidos/resenas")
@@ -60,5 +72,15 @@ public class UsuarioController {
         usuarioService.actualizarResenaPorTitulo(username, datos);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("usuarios/{username}/biblioteca/eliminar-libro")
+    public ResponseEntity<String> eliminarLibro(
+            @PathVariable String username,
+            @RequestBody EliminarLibroDTO dto) {
+
+        usuarioService.eliminarLibroPorTitulo(username, dto.titulo());
+        return ResponseEntity.ok("Libro eliminado exitosamente");
+    }
+
 
 }

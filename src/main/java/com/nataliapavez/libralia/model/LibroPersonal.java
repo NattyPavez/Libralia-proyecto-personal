@@ -55,7 +55,7 @@ public class LibroPersonal {
         this.urlPortada = urlPortada != null ? urlPortada : "Sin imagen disponible";
         this.anioDePublicacion = (anioDePublicacion > 0) ? anioDePublicacion : 0;
         this.reseniaPersonal = (reseniaPersonal != null && !reseniaPersonal.isBlank()) ? reseniaPersonal : "Sin reseña personal por el momento";
-        this.calificacionGoogle = (calificacionGoogle != null && calificacionGoogle >= 0 && calificacionGoogle <= 5) ? calificacionGoogle : 0.0;
+        this.calificacionGoogle = (calificacionGoogle == null || calificacionGoogle == 0.0) ? null : calificacionGoogle;
         this.calificacionPersonal = calificacionPersonal;
         this.estadoLectura = estadoLectura != null ? estadoLectura : EstadoLectura.POR_LEER;
         this.libroLibralia = libroLibralia;
@@ -153,8 +153,8 @@ public class LibroPersonal {
         this.estadoLectura = estadoLectura;
     }
 
-    public double getCalificacionGoogle() {
-        return calificacionGoogle;
+    public Double getCalificacionGoogle() {
+        return (calificacionGoogle == null || calificacionGoogle == 0.0) ? null : calificacionGoogle;
     }
 
     public void setCalificacionGoogle(Double calificacionGoogle) {

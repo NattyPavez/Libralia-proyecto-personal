@@ -1,4 +1,6 @@
 package com.nataliapavez.libralia.dto;
 
-public record EliminarLibroDTO(String titulo) {
+import jakarta.validation.constraints.NotBlank;
+
+public record EliminarLibroDTO(@NotBlank String titulo) {
 }

@@ -4,6 +4,8 @@ import com.nataliapavez.libralia.dto.LibroLibraliaDTO;
 import com.nataliapavez.libralia.model.LibroLibraliaDB;
 import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +26,9 @@ public class LibroLibraliaDBService {
                 });
     }
 
-    public List<LibroLibraliaDTO> obtenerTodosLosLibrosDTO() {
-        return libroLibraliaRepo.findAll()
-                .stream()
-                .map(LibroLibraliaDTO::desdeEntidad)
-                .toList();
+    public Page<LibroLibraliaDTO> obtenerTodosLosLibrosDTO(Pageable pageable) {
+        return libroLibraliaRepo.findAll(pageable)
+                .map(LibroLibraliaDTO::desdeEntidad);
     }
 
 }

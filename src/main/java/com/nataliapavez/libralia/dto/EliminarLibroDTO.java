@@ -1,4 +1,4 @@
 package com.nataliapavez.libralia.dto;
 
-public record EliminarLibroDTO() {
+public record EliminarLibroDTO(String titulo) {
 }

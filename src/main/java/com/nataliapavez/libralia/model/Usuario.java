@@ -131,6 +131,10 @@ public class Usuario {
 
     // Getters and Setters
 
+    public void setLibros(List<LibroPersonal> libros) {
+        this.libros = libros;
+    }
+
     public Long getId() {
         return Id;
     }

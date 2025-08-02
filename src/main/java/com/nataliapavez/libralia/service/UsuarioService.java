@@ -1,15 +1,14 @@
 package com.nataliapavez.libralia.service;
 
-import com.nataliapavez.libralia.dto.LibroDTO;
-import com.nataliapavez.libralia.dto.PerfilDTO;
-import com.nataliapavez.libralia.dto.ResenaYCalificacionDeLibroPorUsuarioDTO;
-import com.nataliapavez.libralia.dto.UsuarioDTO;
+import com.nataliapavez.libralia.dto.*;
 import com.nataliapavez.libralia.model.EstadoLectura;
+import com.nataliapavez.libralia.model.LibroPersonal;
 import com.nataliapavez.libralia.model.Usuario;
 import com.nataliapavez.libralia.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -86,5 +85,26 @@ public class UsuarioService {
                 .map(ResenaYCalificacionDeLibroPorUsuarioDTO::new)
                 .toList();
     }
+    @Transactional
+    public void actualizarResenaPorTitulo(String nombreUsuario, EditarResenaPorTituloLibroLeidoDTO datos) {
+        Usuario usuario = usuarioRepositorio.findByNombreUsuario(nombreUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        LibroPersonal libro = usuario.getLibros().stream()
+                .filter(l -> l.getTitulo().equalsIgnoreCase(datos.titulo()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Libro con título '" + datos.titulo() + "' no encontrado en la biblioteca del usuario"));
+
+        System.out.println("ID del libro encontrado: " + libro.getId());
+
+        if (libro.getEstadoLectura() != EstadoLectura.LEIDO) {
+            throw new IllegalStateException("Solo puedes editar reseñas de libros marcados como 'LEIDO'");
+        }
+
+        libro.editarResenia(datos.resenaPersonal());
+        libro.calificar(datos.calificacionPersonal());
+    }
+
+
 
 }

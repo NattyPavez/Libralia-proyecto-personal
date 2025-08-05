@@ -1,6 +1,6 @@
 package com.nataliapavez.libralia.dto;
 
-import com.nataliapavez.libralia.model.LibroPersonal;
+import com.nataliapavez.libralia.domain.model.LibroPersonal;
 
 public record ResenaYCalificacionDeLibroPorUsuarioDTO(String titulo,
                                                       String autor,

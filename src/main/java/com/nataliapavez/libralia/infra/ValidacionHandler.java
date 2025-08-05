@@ -1,4 +1,4 @@
-package com.nataliapavez.libralia.controller;
+package com.nataliapavez.libralia.infra;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

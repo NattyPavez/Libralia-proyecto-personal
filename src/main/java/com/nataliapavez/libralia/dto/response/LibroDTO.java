@@ -1,5 +1,7 @@
 package com.nataliapavez.libralia.dto;
 
+import com.nataliapavez.libralia.domain.model.LibroPersonal;
+
 public record LibroDTO(
         String titulo,
         String autor,
@@ -12,7 +14,7 @@ public record LibroDTO(
         Double calificacionPersonal,
         String estadoLectura
 ) {
-    public LibroDTO(com.nataliapavez.libralia.model.LibroPersonal libro) {
+    public LibroDTO(LibroPersonal libro) {
         this(
                 libro.getTitulo(),
                 libro.getAutor(),

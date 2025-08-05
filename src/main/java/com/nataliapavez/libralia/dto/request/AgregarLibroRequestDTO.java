@@ -1,6 +1,7 @@
-package com.nataliapavez.libralia.dto;
+package com.nataliapavez.libralia.dto.request;
 
-import com.nataliapavez.libralia.model.EstadoLectura;
+import com.nataliapavez.libralia.domain.model.EstadoLectura;
+import com.nataliapavez.libralia.dto.external.LibroGoogleDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

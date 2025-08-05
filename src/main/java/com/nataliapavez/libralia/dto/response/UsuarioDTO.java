@@ -1,6 +1,6 @@
 package com.nataliapavez.libralia.dto;
 
-import com.nataliapavez.libralia.model.Usuario;
+import com.nataliapavez.libralia.domain.model.Usuario;
 
 public record UsuarioDTO(
         String nombreUsuario,

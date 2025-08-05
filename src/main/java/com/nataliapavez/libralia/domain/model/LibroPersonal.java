@@ -114,7 +114,7 @@ public class LibroPersonal {
 // getters y setters
 
     public void setId(Long id) {
-        id = id;
+        this.id = id;
     }
 
     public String getDescripcionGoogle() {
@@ -135,10 +135,6 @@ public class LibroPersonal {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        id = id;
     }
 
     public void setCalificacionPersonal(Double calificacionPersonal) {

@@ -1,6 +1,6 @@
 package com.nataliapavez.libralia.dto;
 
-import com.nataliapavez.libralia.model.LibroLibraliaDB;
+import com.nataliapavez.libralia.domain.model.LibroLibraliaDB;
 
 public record LibroLibraliaDTO(
         String titulo,

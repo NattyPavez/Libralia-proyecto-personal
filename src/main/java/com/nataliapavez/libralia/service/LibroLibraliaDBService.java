@@ -1,14 +1,12 @@
 package com.nataliapavez.libralia.service;
 
-import com.nataliapavez.libralia.dto.LibroLibraliaDTO;
-import com.nataliapavez.libralia.model.LibroLibraliaDB;
-import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
+import com.nataliapavez.libralia.dto.response.LibroLibraliaDTO;
+import com.nataliapavez.libralia.domain.model.LibroLibraliaDB;
+import com.nataliapavez.libralia.domain.repository.LibroLibraliaDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LibroLibraliaDBService {

@@ -1,4 +1,4 @@
-package com.nataliapavez.libralia.model;
+package com.nataliapavez.libralia.domain.model;
 
 import jakarta.persistence.*;
 

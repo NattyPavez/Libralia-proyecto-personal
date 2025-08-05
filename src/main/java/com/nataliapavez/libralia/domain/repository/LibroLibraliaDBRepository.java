@@ -1,6 +1,6 @@
-package com.nataliapavez.libralia.repository;
+package com.nataliapavez.libralia.domain.repository;
 
-import com.nataliapavez.libralia.model.LibroLibraliaDB;
+import com.nataliapavez.libralia.domain.model.LibroLibraliaDB;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

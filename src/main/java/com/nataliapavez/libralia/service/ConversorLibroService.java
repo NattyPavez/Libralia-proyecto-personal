@@ -2,7 +2,6 @@ package com.nataliapavez.libralia.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nataliapavez.libralia.dto.ResultadoGoogle;
 
 public class ConversorLibroService implements IConversorLibroService{
     private ObjectMapper objectMapper = new ObjectMapper();

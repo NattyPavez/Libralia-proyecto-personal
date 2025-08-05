@@ -1,4 +1,4 @@
-package com.nataliapavez.libralia.dto;
+package com.nataliapavez.libralia.dto.response;
 
 import com.nataliapavez.libralia.domain.model.Usuario;
 

@@ -1,10 +1,11 @@
 package com.nataliapavez.libralia.service;
 
-import com.nataliapavez.libralia.dto.*;
-import com.nataliapavez.libralia.model.EstadoLectura;
-import com.nataliapavez.libralia.model.LibroPersonal;
-import com.nataliapavez.libralia.model.Usuario;
-import com.nataliapavez.libralia.repository.UsuarioRepository;
+import com.nataliapavez.libralia.domain.model.EstadoLectura;
+import com.nataliapavez.libralia.domain.model.LibroPersonal;
+import com.nataliapavez.libralia.domain.model.Usuario;
+import com.nataliapavez.libralia.domain.repository.UsuarioRepository;
+import com.nataliapavez.libralia.dto.request.EditarResenaPorTituloLibroLeidoDTO;
+import com.nataliapavez.libralia.dto.response.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

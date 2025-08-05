@@ -1,4 +1,4 @@
-package com.nataliapavez.libralia.dto;
+package com.nataliapavez.libralia.dto.external;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;

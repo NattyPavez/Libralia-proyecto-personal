@@ -1,6 +1,6 @@
-package com.nataliapavez.libralia.repository;
+package com.nataliapavez.libralia.domain.repository;
 
-import com.nataliapavez.libralia.model.Usuario;
+import com.nataliapavez.libralia.domain.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

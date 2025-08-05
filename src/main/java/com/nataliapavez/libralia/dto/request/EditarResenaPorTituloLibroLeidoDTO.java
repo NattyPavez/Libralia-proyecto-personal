@@ -1,4 +1,4 @@
-package com.nataliapavez.libralia.dto;
+package com.nataliapavez.libralia.dto.request;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

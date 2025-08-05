@@ -1,4 +1,4 @@
-package com.nataliapavez.libralia.dto;
+package com.nataliapavez.libralia.dto.response;
 
 public record UsuarioResumenDTO(
         Long id,

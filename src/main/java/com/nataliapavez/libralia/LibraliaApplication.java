@@ -1,9 +1,9 @@
 //package com.nataliapavez.libralia;
 //
 //import com.nataliapavez.libralia.principal.Principal;
-//import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
-//import com.nataliapavez.libralia.repository.LibroPersonalRepository;
-//import com.nataliapavez.libralia.repository.UsuarioRepository;
+//import com.nataliapavez.libralia.domain.repository.LibroLibraliaDBRepository;
+//import com.nataliapavez.libralia.domain.repository.LibroPersonalRepository;
+//import com.nataliapavez.libralia.domain.repository.UsuarioRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.boot.SpringApplication;

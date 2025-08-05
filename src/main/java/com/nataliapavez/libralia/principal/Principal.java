@@ -1,16 +1,16 @@
 package com.nataliapavez.libralia.principal;
 
 import com.nataliapavez.libralia.api.ConsumoAPI;
-import com.nataliapavez.libralia.dto.ImageLinks;
-import com.nataliapavez.libralia.dto.ResultadoGoogle;
-import com.nataliapavez.libralia.dto.VolumeInfo;
-import com.nataliapavez.libralia.model.EstadoLectura;
-import com.nataliapavez.libralia.model.LibroLibraliaDB;
-import com.nataliapavez.libralia.model.LibroPersonal;
-import com.nataliapavez.libralia.model.Usuario;
-import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
-import com.nataliapavez.libralia.repository.LibroPersonalRepository;
-import com.nataliapavez.libralia.repository.UsuarioRepository;
+import com.nataliapavez.libralia.dto.external.ImageLinks;
+import com.nataliapavez.libralia.dto.external.ResultadoGoogle;
+import com.nataliapavez.libralia.dto.external.VolumeInfo;
+import com.nataliapavez.libralia.domain.model.EstadoLectura;
+import com.nataliapavez.libralia.domain.model.LibroLibraliaDB;
+import com.nataliapavez.libralia.domain.model.LibroPersonal;
+import com.nataliapavez.libralia.domain.model.Usuario;
+import com.nataliapavez.libralia.domain.repository.LibroLibraliaDBRepository;
+import com.nataliapavez.libralia.domain.repository.LibroPersonalRepository;
+import com.nataliapavez.libralia.domain.repository.UsuarioRepository;
 import com.nataliapavez.libralia.service.ConversorLibroService;
 import org.springframework.stereotype.Component;
 import jakarta.transaction.Transactional;

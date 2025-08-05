@@ -1,11 +1,12 @@
 package com.nataliapavez.libralia.service;
 
 import com.nataliapavez.libralia.api.ConsumoAPI;
-import com.nataliapavez.libralia.dto.*;
-import com.nataliapavez.libralia.model.EstadoLectura;
-import com.nataliapavez.libralia.model.LibroLibraliaDB;
-import com.nataliapavez.libralia.model.LibroPersonal;
-import com.nataliapavez.libralia.repository.LibroLibraliaDBRepository;
+import com.nataliapavez.libralia.domain.repository.LibroLibraliaDBRepository;
+import com.nataliapavez.libralia.dto.external.ItemGoogle;
+import com.nataliapavez.libralia.dto.external.LibroGoogleDTO;
+import com.nataliapavez.libralia.dto.external.ResultadoGoogle;
+import com.nataliapavez.libralia.dto.request.BuscarLibroRequestDTO;
+import com.nataliapavez.libralia.dto.response.LibroBusquedaResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,6 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service

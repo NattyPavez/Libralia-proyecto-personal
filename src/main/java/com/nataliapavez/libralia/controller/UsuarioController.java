@@ -1,10 +1,11 @@
 package com.nataliapavez.libralia.controller;
 
-import com.nataliapavez.libralia.dto.*;
-import com.nataliapavez.libralia.repository.UsuarioRepository;
+import com.nataliapavez.libralia.domain.repository.UsuarioRepository;
+import com.nataliapavez.libralia.dto.request.EditarResenaPorTituloLibroLeidoDTO;
+import com.nataliapavez.libralia.dto.request.EliminarLibroDTO;
+import com.nataliapavez.libralia.dto.response.*;
 import com.nataliapavez.libralia.service.UsuarioService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,49 +23,58 @@ public class UsuarioController {
     }
 
     @GetMapping("/perfil/{id}")
-    public PerfilDTO obtenerPerfil(@PathVariable Long id) {
-        return usuarioService.obtenerPerfil(id);
+    public ResponseEntity<PerfilDTO> obtenerPerfil(@PathVariable Long id) {
+        var perfil = usuarioService.obtenerPerfil(id);
+        return ResponseEntity.ok(perfil);
     }
 
 
     @GetMapping("/usuarios")
-    public List<UsuarioResumenDTO> listarUsuarios() {
-        return usuarioRepository.findAll()
+    public ResponseEntity<List<UsuarioResumenDTO>> listarUsuarios() {
+        var usuarios =usuarioRepository.findAll()
                 .stream()
                 .map(u -> new UsuarioResumenDTO(u.getId(), u.getNombreUsuario(), u.getCorreo()))
                 .toList();
+        return ResponseEntity.ok(usuarios);
     }
 
     @GetMapping("/usuarios/{username}")
-    public UsuarioDTO obtenerUsuarioPublico(@PathVariable String username) {
-        return usuarioService.obtenerUsuarioPublico(username);
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioPublico(@PathVariable String username) {
+        var usuario = usuarioService.obtenerUsuarioPublico(username);
+        return ResponseEntity.ok(usuario);
     }
 
     @GetMapping("/usuarios/{username}/biblioteca")
-    public BibliotecaUsuarioDTO obtenerBibliotecaPublica(@PathVariable String username) {
-        return usuarioService.obtenerBibliotecaPublica(username);
+    public ResponseEntity<BibliotecaUsuarioDTO> obtenerBibliotecaPublica(@PathVariable String username) {
+        var biblioteca = usuarioService.obtenerBibliotecaPublica(username);
+        return ResponseEntity.ok(biblioteca);
     }
 
     //insomnia probar con lana_talia_es
     @GetMapping("/usuarios/{username}/biblioteca/por-leer")
-    public List<LibroDTO> obtenerLibrosPorLeer(@PathVariable String username) {
-        return usuarioService.obtenerLibrosPorLeerDeUsuario(username);
+    public ResponseEntity<List<LibroDTO>> obtenerLibrosPorLeer(@PathVariable String username) {
+        var libros = usuarioService.obtenerLibrosPorLeerDeUsuario(username);
+        return ResponseEntity.ok(libros);
     }
 
     @GetMapping("/usuarios/{username}/biblioteca/leyendo")
-    public List<LibroDTO> obtenerLibrosAbiertos(@PathVariable String username) {
-        return usuarioService.obtenerLibrosAbiertosDeUsuario(username);
+    public ResponseEntity<List<LibroDTO>> obtenerLibrosAbiertos(@PathVariable String username) {
+        var libros = usuarioService.obtenerLibrosAbiertosDeUsuario(username);
+        return ResponseEntity.ok(libros);
     }
 
     @GetMapping("/usuarios/{username}/biblioteca/leidos")
-    public List<LibroDTO> obtenerLibrosLeidos(@PathVariable String username) {
-        return usuarioService.obtenerLibrosLeidosDeUsuario(username);
+    public ResponseEntity<List<LibroDTO>> obtenerLibrosLeidos(@PathVariable String username) {
+        var libros =  usuarioService.obtenerLibrosLeidosDeUsuario(username);
+        return ResponseEntity.ok(libros);
     }
 
     @GetMapping("/usuarios/{username}/biblioteca/leidos/resenas")
-    public List<ResenaYCalificacionDeLibroPorUsuarioDTO> obtenerResenasPorUsuario(@PathVariable String username) {
-        return usuarioService.obtenerResenasDeLibrosLeidosPorUsuario(username);
+    public ResponseEntity<List<ResenaYCalificacionDeLibroPorUsuarioDTO>> obtenerResenasPorUsuario(@PathVariable String username) {
+        var libros = usuarioService.obtenerResenasDeLibrosLeidosPorUsuario(username);
+        return ResponseEntity.ok(libros);
     }
+
     @PutMapping("/usuarios/{username}/biblioteca/leidos/editar-resena")
     public ResponseEntity<Void> editarResenaPorTitulo(
             @PathVariable String username,

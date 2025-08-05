@@ -1,7 +1,6 @@
-package com.nataliapavez.libralia.dto;
+package com.nataliapavez.libralia.dto.external;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

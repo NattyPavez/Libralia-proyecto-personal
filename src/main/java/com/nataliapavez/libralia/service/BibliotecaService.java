@@ -5,7 +5,7 @@ import com.nataliapavez.libralia.dto.external.LibroGoogleDTO;
 import com.nataliapavez.libralia.domain.model.EstadoLectura;
 import com.nataliapavez.libralia.domain.model.LibroLibraliaDB;
 import com.nataliapavez.libralia.domain.model.LibroPersonal;
-import com.nataliapavez.libralia.domain.model.Usuario;
+import com.nataliapavez.libralia.domain.model.usuario.Usuario;
 import com.nataliapavez.libralia.domain.repository.LibroLibraliaDBRepository;
 import com.nataliapavez.libralia.domain.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;

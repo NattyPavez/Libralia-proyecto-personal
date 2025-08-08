@@ -1,5 +1,6 @@
 package com.nataliapavez.libralia.domain.model;
 
+import com.nataliapavez.libralia.domain.model.usuario.Usuario;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,7 +1,7 @@
 package com.nataliapavez.libralia.dto.response;
 
 import com.nataliapavez.libralia.domain.model.EstadoLectura;
-import com.nataliapavez.libralia.domain.model.Usuario;
+import com.nataliapavez.libralia.domain.model.usuario.Usuario;
 
 import java.util.List;
 

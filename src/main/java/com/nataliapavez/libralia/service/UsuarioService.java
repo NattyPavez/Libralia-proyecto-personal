@@ -2,7 +2,7 @@ package com.nataliapavez.libralia.service;
 
 import com.nataliapavez.libralia.domain.model.EstadoLectura;
 import com.nataliapavez.libralia.domain.model.LibroPersonal;
-import com.nataliapavez.libralia.domain.model.Usuario;
+import com.nataliapavez.libralia.domain.model.usuario.Usuario;
 import com.nataliapavez.libralia.domain.repository.UsuarioRepository;
 import com.nataliapavez.libralia.dto.request.EditarResenaPorTituloLibroLeidoDTO;
 import com.nataliapavez.libralia.dto.response.*;

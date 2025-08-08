@@ -1,11 +1,10 @@
-package com.nataliapavez.libralia.domain.model;
+package com.nataliapavez.libralia.domain.model.usuario;
 
+import com.nataliapavez.libralia.domain.model.EstadoLectura;
+import com.nataliapavez.libralia.domain.model.LibroPersonal;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -25,19 +24,34 @@ public class Usuario {
 
     private String avatarUrl = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
+    // credenciales
+    @Column(nullable = false)
+    private String login;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol = Rol.USER;
+    private boolean activo = true;
+
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<LibroPersonal> libros = new ArrayList<>();
 
 
     // Constructor con lógica de negocio
-    public Usuario(String correo, String nombreUsuario, int edad, String descripcion,
+    public Usuario(String login, String passwordHash, String correo, String nombreUsuario, int edad, String descripcion,
                    String enlaces) {
+        this.login = Objects.requireNonNull(login);
+        this.password = Objects.requireNonNull(passwordHash);
         this.correo = (correo != null && correo.contains("@")) ? correo : "correo@desconocido.com";
         this.nombreUsuario = (nombreUsuario != null && !nombreUsuario.isBlank()) ? nombreUsuario : "Usuario Anónimo";
         this.edad = (edad > 0 && edad < 100) ? edad : 0;
         this.descripcion = Optional.ofNullable(descripcion).filter(s -> !s.isBlank()).orElse(null);
         this.enlaces = Optional.ofNullable(enlaces).filter(s -> !s.isBlank()).orElse(null);
+        this.rol = Rol.USER;
+        this.activo = true;
 
     }
 
@@ -56,7 +70,7 @@ public class Usuario {
         if (!existe) {
             libro.setUsuario(this);
             this.libros.add(libro);
-        }else {
+        } else {
             System.out.println(" Este libro ya está en tu biblioteca. No se volverá a agregar.");
         }
     }
@@ -66,7 +80,7 @@ public class Usuario {
         System.out.println("---------------------");
         System.out.println("PERFIL DE USUARIO");
         System.out.println("---------------------");
-        System.out.println("Avatar: " +  this.avatarUrl);
+        System.out.println("Avatar: " + this.avatarUrl);
         System.out.println("Usuario: " + nombreUsuario);
         System.out.println("Edad: " + edad + " años");
         System.out.println("Sobre mí: " + (descripcion != null ? descripcion : "Sin descripción por el momento"));
@@ -205,4 +219,35 @@ public class Usuario {
                 ? avatarUrl : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
 }

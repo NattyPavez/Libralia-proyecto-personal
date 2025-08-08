@@ -1,10 +1,10 @@
 package com.nataliapavez.libralia.dto.response;
 
-import com.nataliapavez.libralia.domain.model.Usuario;
+import com.nataliapavez.libralia.domain.model.usuario.Usuario;
 
 public record UsuarioDTO(
         String nombreUsuario,
-        int edad,
+        Integer edad,
         String descripcion,
         String enlaces,
         String avatarUrl

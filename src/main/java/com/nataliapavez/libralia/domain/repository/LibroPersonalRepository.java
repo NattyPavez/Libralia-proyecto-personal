@@ -1,7 +1,7 @@
 package com.nataliapavez.libralia.domain.repository;
 
 import com.nataliapavez.libralia.domain.model.LibroPersonal;
-import com.nataliapavez.libralia.domain.model.Usuario;
+import com.nataliapavez.libralia.domain.model.usuario.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

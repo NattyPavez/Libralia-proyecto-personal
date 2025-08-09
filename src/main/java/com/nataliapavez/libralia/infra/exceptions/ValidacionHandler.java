@@ -1,4 +1,4 @@
-package com.nataliapavez.libralia.infra;
+package com.nataliapavez.libralia.infra.exceptions;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

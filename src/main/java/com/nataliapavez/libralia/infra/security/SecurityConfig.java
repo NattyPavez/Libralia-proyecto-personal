@@ -1,7 +1,8 @@
-package com.nataliapavez.libralia.config;
+package com.nataliapavez.libralia.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,9 +32,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Deshabilita CSRF para APIs REST
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sin sesiones
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/registro", "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/auth/registro", "/auth/login").permitAll()
                         .anyRequest().permitAll() // Por ahora, todo permitido (luego se ajusta con roles)
                 )
                 .build();
     }
+
 }

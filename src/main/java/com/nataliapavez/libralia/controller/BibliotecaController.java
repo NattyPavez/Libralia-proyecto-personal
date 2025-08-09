@@ -31,17 +31,16 @@ public class BibliotecaController {
 
             var uri = uriBuilder
                     .path("/usuarios/{username}/biblioteca")
-                    .buildAndExpand(request.nombreUsuario(), libro.getId())
+                    .buildAndExpand(request.nombreUsuario())
                     .toUri();
+            return ResponseEntity.created(uri)
 
-            var dtoRespuesta = new LibroAgregadoResponseDTO(
+                    .body(new LibroAgregadoResponseDTO(
                     libro.getId(),
                     libro.getTitulo(),
                     libro.getEstadoLectura(),
-                    request.nombreUsuario()
+                    request.nombreUsuario())
             );
-
-            return ResponseEntity.created(uri).body(dtoRespuesta);
 
         } catch (IllegalArgumentException | IllegalStateException e) {
             return ResponseEntity.badRequest().build();

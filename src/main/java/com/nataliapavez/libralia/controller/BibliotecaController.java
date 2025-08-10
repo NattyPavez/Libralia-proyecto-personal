@@ -5,6 +5,7 @@ import com.nataliapavez.libralia.dto.response.LibroAgregadoResponseDTO;
 import com.nataliapavez.libralia.service.BibliotecaService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,9 @@ public class BibliotecaController {
         this.bibliotecaService = bibliotecaService;
     }
 
+    @Transactional
     @PostMapping("/agregar")
-    public ResponseEntity<LibroAgregadoResponseDTO> agregarLibroABiblioteca(
+    public ResponseEntity agregarLibroABiblioteca(
             @RequestBody @Valid AgregarLibroRequestDTO request,
             UriComponentsBuilder uriBuilder) {
         try {

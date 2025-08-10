@@ -54,24 +54,42 @@ Actualmente incluye endpoints REST organizados profesionalmente con controladore
 - Endpoint para **eliminar libros** de cualquier biblioteca del usuario.
 - Reorganización del `UsuarioController` en rutas limpias y semánticas siguiendo buenas prácticas RESTful.
 
+---
 
-## 🧭 Endpoints actuales del `UsuarioController`
+  ### 🔐 Seguridad y Autenticación
+Ahora Libralia cuenta con **Spring Security + JWT** para proteger el acceso a sus funcionalidades:  
+- Registro de usuarios.  
+- Login y generación de token JWT.  
+- Validación automática del token en cada request.  
+- Acceso restringido a endpoints según autenticación.
+
+---
+
+### 📌 Endpoints actuales
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| `GET` | `/usuarios` | Lista todos los usuarios registrados. |
-| `GET` | `/usuarios/{username}` | Devuelve los datos públicos del usuario. |
-| `GET` | `/usuarios/{username}/biblioteca` | Devuelve avatar y todas las bibliotecas del usuario. |
-| `GET` | `/usuarios/{username}/biblioteca/leidos` | Lista libros leídos. |
-| `GET` | `/usuarios/{username}/biblioteca/por-leer` | Lista libros por leer. |
-| `GET` | `/usuarios/{username}/biblioteca/leyendo` | Lista libros en lectura actual. |
-| `GET` | `/usuarios/{username}/biblioteca/leidos/resenas` | Lista reseñas de libros leídos. |
-| `PUT` | `/usuarios/{username}/biblioteca/leidos/editar-resena` | Edita la reseña y calificación personal de un título leído por usuario. |
-| `DELETE` | `/usuarios/{username}/biblioteca/eliminar-libro` | Elimina un libro de cualquier biblioteca del usuario. |
+| **POST** | `/login` | Inicia sesión y obtiene token JWT. |
+| **POST** | `/usuarios` | Crea un nuevo usuario. |
+| **GET** | `/usuarios` | Lista todos los usuarios registrados. |
+| **GET** | `/usuarios/{username}` | Devuelve los datos públicos del usuario. |
+| **GET** | `/usuarios/{username}/biblioteca` | Devuelve avatar y todas las bibliotecas del usuario. |
+| **GET** | `/usuarios/{username}/biblioteca/leidos` | Lista libros leídos. |
+| **GET** | `/usuarios/{username}/biblioteca/leyendo` | Lista libros en lectura actual. |
+| **GET** | `/usuarios/{username}/biblioteca/por-leer` | Lista libros por leer. |
+| **GET** | `/usuarios/{username}/biblioteca/leidos/resenas` | Lista reseñas de libros leídos. |
+| **POST** | `/biblioteca/agregar` | Agrega un libro a la biblioteca del usuario. |
+| **PUT** | `/usuarios/{username}/biblioteca/leidos/editar-resena` | Edita la reseña y calificación personal de un libro leído por usuario. |
+| **DELETE** | `/usuarios/{username}/biblioteca/eliminar-libro` | Elimina un libro de cualquier biblioteca del usuario. |
+| **POST** | `/libros/buscar` | Busca libros en Google Books API. |
+| **GET** | `/libros-db` | Lista libros registrados en base de datos. |
 
-## 🛠️ Tecnologías utilizadas
 
-- **Java 21 / 24** – Lenguaje principal del backend.
+---
+
+## 🛠️ Otras tecnologías utilizadas
+
+- **Java 21 – Lenguaje principal del backend.
 - **Spring Boot 3** – Framework para desarrollo de aplicaciones web modernas.
 - **Spring Data JPA** – Abstracción para trabajar con bases de datos relacionales.
 - **PostgreSQL** – Sistema de gestión de base de datos utilizado en producción.
@@ -85,30 +103,34 @@ Actualmente incluye endpoints REST organizados profesionalmente con controladore
 - **Insomnia** – Pruebas de endpoints REST.
 - **ChatGPT** – Asistencia para documentación, lógica y planificación de mejoras.
 
-## 🌐 Estado Actual
+## 📌 Estado Actual
 
-✅ Proyecto consolidado en arquitectura **Spring Boot**  
+✅ Proyecto consolidado en arquitectura **Spring Boot 3**  
 ✅ Integración completa con base de datos **PostgreSQL**  
 ✅ Capacidad de búsqueda y selección de libros vía **Google Books API**  
 ✅ Creación y gestión de usuarios con perfiles personalizados  
-✅ Clasificación de libros por estado de lectura: *leyendo*, *por leer*, *leídos*  
+✅ Clasificación de libros por estado de lectura: *Leyendo*, *Por leer*, *Leídos*  
 ✅ Agregado de **reseñas** y **calificaciones personales**  
 ✅ Endpoints REST funcionando para exponer la biblioteca y perfil de cada usuario  
 ✅ Edición y eliminación de libros desde el perfil  
 ✅ Implementación de **DTOs**, paginación y buenas prácticas en la arquitectura  
+✅ Autenticación y autorización de usuarios (registro, login, token JWT)  
+✅ Protección de endpoints privados con **Spring Security**  
+✅ Validaciones robustas con mensajes personalizados  
+✅ Optimización de consultas en base de datos  
+✅ API asegurada con autenticación para proteger los datos del usuario  
 
 ---
 
-## 🎯 Próximas mejoras
+## 🚀 Próximas mejoras
 
-- Autenticación y autorización de usuarios (registro, login, token JWT)
-- Refactor y protección de endpoints privados
-- Validaciones más robustas con mensajes personalizados
-- Optimización de consultas en base de datos
-- Inicio del desarrollo del **frontend** de Libralia
-- Publicación en entorno cloud (Render, Railway o Heroku)
+- Refactor de lógica para mayor desacoplamiento y escalabilidad  
+- Implementación de roles y permisos (ADMIN / USER)  
+- Inicio del desarrollo del **frontend** de Libralia  
+- Publicación en entorno cloud  
+- Documentación para facilitar el consumo de la API  
+- Implementación de tests automatizados   
 
-🔐 **Próximo paso inmediato:** asegurar la API con autenticación y proteger los datos del usuario
 
 ## 🎬 Pruebas y demo
 

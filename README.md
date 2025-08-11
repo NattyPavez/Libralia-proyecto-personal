@@ -136,9 +136,11 @@ Ahora Libralia cuenta con **Spring Security + JWT** para proteger el acceso a su
 
 🧪 Pruebas realizadas en **Insomnia** para validar endpoints de Libralia:
 
+🎥 [**Puedes ver el video demo aquí!**](https://www.youtube.com/watch?v=SUDqsni0l2I)
+
 ![Captura insomnia para README](https://github.com/user-attachments/assets/f86ac599-c2c8-4ddb-8253-6cfb1eb4d8ab)
 
-🎥 *Próximamente: Video demo completo del flujo de usuario.*
+
 
 ## 📬 Contacto
 

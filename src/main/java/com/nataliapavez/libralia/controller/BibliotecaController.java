@@ -3,6 +3,7 @@ package com.nataliapavez.libralia.controller;
 import com.nataliapavez.libralia.dto.request.AgregarLibroRequestDTO;
 import com.nataliapavez.libralia.dto.response.LibroAgregadoResponseDTO;
 import com.nataliapavez.libralia.service.BibliotecaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/biblioteca")
+@SecurityRequirement(name = "bearer-key")
 public class BibliotecaController {
 
     private final BibliotecaService bibliotecaService;

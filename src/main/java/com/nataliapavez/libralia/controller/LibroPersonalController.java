@@ -2,6 +2,7 @@ package com.nataliapavez.libralia.controller;
 
 import com.nataliapavez.libralia.dto.response.LibroDTO;
 import com.nataliapavez.libralia.service.LibroPersonalService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/libro-personal")
+@SecurityRequirement(name = "bearer-key")
 public class LibroPersonalController {
 
     @Autowired

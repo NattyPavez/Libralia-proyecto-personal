@@ -3,6 +3,7 @@ package com.nataliapavez.libralia.controller;
 import com.nataliapavez.libralia.dto.request.BuscarLibroRequestDTO;
 import com.nataliapavez.libralia.dto.response.LibroBusquedaResponseDTO;
 import com.nataliapavez.libralia.service.LibroBusquedaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/libros")
+@SecurityRequirement(name = "bearer-key")
 public class LibroBusquedaController {
 
     private LibroBusquedaService libroBusquedaService;

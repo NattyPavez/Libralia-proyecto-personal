@@ -2,6 +2,7 @@ package com.nataliapavez.libralia.controller;
 
 import com.nataliapavez.libralia.dto.response.LibroLibraliaDTO;
 import com.nataliapavez.libralia.service.LibroLibraliaDBService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/libros-db") // para campiar a:  /api/libros
+@RequestMapping("/libros-db")
+@SecurityRequirement(name = "bearer-key")// para campiar a:  /api/libros
 public class LibroLibraliaController {
 
     @Autowired

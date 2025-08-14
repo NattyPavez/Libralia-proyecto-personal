@@ -5,6 +5,7 @@ import com.nataliapavez.libralia.dto.request.EditarResenaPorTituloLibroLeidoDTO;
 import com.nataliapavez.libralia.dto.request.EliminarLibroDTO;
 import com.nataliapavez.libralia.dto.response.*;
 import com.nataliapavez.libralia.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

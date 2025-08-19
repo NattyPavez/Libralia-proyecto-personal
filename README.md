@@ -192,10 +192,10 @@ java -jar target/libralia-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod`
 ✅ Validaciones robustas con mensajes personalizados  
 ✅ Optimización de consultas en base de datos  
 ✅ API asegurada con autenticación para proteger los datos del usuario  
-✅ Documentación auto-generada con Swagger y disponible en `/swagger-ui/index.html`.
-✅ Build reproducible con `./mvnw -DskipTests clean package` y ejecución por `JAR`.
-✅ Perfiles `dev` (H2) y `prod` (PostgreSQL) con configuración vía variables de entorno.
-✅ Swagger liberado en seguridad para facilitar pruebas (endpoints protegidos siguen con `JWT`).
+✅ Documentación auto-generada con Swagger y disponible en `/swagger-ui/index.html`          
+✅ Build reproducible con `./mvnw -DskipTests clean package` y ejecución por `JAR`              
+✅ Perfiles `dev` (H2) y `prod` (PostgreSQL) con configuración vía variables de entorno              
+✅ Swagger liberado en seguridad para facilitar pruebas (endpoints protegidos siguen con `JWT`)           
 ✅ API lista para ejecutar en cualquier equipo con Java 21.
 
 ---

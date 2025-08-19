@@ -64,6 +64,76 @@ Ahora Libralia cuenta con **Spring Security + JWT** para proteger el acceso a su
 - Acceso restringido a endpoints según autenticación.
 
 ---
+### 🧭 Documentación, pruebas y build para distribución (Nuevo)
+Esta sección cubre las últimas implementaciones relacionadas con la documentación, las pruebas y el empaquetado del proyecto para su distribución.
+
+📝 **Documentación con Swagger**
+Se ha integrado la documentación viva con **Swagger** gracias a la librería **springdoc-openapi** (v2.8.9). Ahora puedes:
+
+- Acceder a la interfaz de usuario de **Swagger UI** en: `http://localhost:8081/swagger-ui/index.html`
+- Obtener el archivo **Spec JSON** de la API en: `http://localhost:8081/v3/api-docs`
+- Autorizar tus peticiones: en Swagger UI, haz clic en **Authorize** y pega tu **JWT** con el prefijo `Bearer` (ej.: `Bearer eyJhbGciOi...`).
+
+  **Nota de seguridad**: Los endpoints de Swagger ( `/v3/api-docs/**`, `/swagger-ui.html`, `/swagger-ui/**`) han sido liberados de la seguridad para permitir el acceso público.
+---
+### 📦 Cómo compilar y ejecutar el proyecto
+
+1. **Requisitos previos**
+
+Asegúrate de tener instalados:
+- **Git**: Para clonar el repositorio.
+- **Java Development Kit (JDK) 17 o 21**: Para ejecutar la aplicación.
+- **Apache Maven**: Para compilar el proyecto (el `mvnw` wrapper lo descarga por ti si no lo tienes).
+
+2. **Clonar el repositorio**
+- Abre tu terminal y clona el proyecto desde GitHub:
+`git clone https://github.com/NattyPavez/Libralia-proyecto-personal.git`
+
+- Luego, navega al directorio del proyecto:
+`cd Libralia-proyecto-personal`
+
+3. **Compilar el proyecto**
+- Ahora, compila la aplicación en un archivo ejecutable JAR. Este comando también saltará las pruebas para una compilación más rápida.
+`./mvnw -DskipTests clean package`
+
+- Este proceso creará el archivo `libralia-0.0.1-SNAPSHOT.jar` dentro de la carpeta target/.
+
+4. **Ejecutar la aplicación**
+- Puedes ejecutar el proyecto con dos perfiles de configuración: `dev` (H2 en memoria) o `prod` (PostgreSQL).
+
+    **Opción A:** Ejecutar con perfil `dev` (¡Recomendado para pruebas rápidas!)
+  
+    - Este perfil usa una base de datos H2 en memoria, por lo que no necesitas configurar nada.
+            `java -jar target/libralia-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev`
+
+    **Opción B:** Ejecutar con perfil `prod` (PostgreSQL)
+
+    - Para usar este perfil, asegúrate de tener una base de datos PostgreSQL configurada y de exportar las variables de     entorno con tus credenciales.
+
+      - **PowerShell (Windows)**
+
+      `$env:LIBRALIA_DB_HOST="localhost"
+$env:LIBRALIA_DB_NAME="libralia"
+$env:LIBRALIA_DB_USER="postgres"
+$env:LIBRALIA_DB_PASSWORD="<tu_password_real>"
+$env:LIBRALIA_DB_PORT="5432"
+java -jar target\libralia-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod`
+
+      - **Bash (Linux/macOS)**
+
+      `export LIBRALIA_DB_HOST=localhost
+export LIBRALIA_DB_NAME=libralia
+export LIBRALIA_DB_USER=postgres
+export LIBRALIA_DB_PASSWORD=<tu_password_real>
+export LIBRALIA_DB_PORT=5432
+java -jar target/libralia-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod`
+
+5. **Probar la API con Swagger**
+
+- Una vez que la aplicación esté en ejecución, abre tu navegador y visita el siguiente enlace para ver la documentación de la API y probar sus endpoints:
+`http://localhost:8081/swagger-ui/index.html`
+
+---
 
 ### 📌 Endpoints actuales
 
@@ -102,6 +172,9 @@ Ahora Libralia cuenta con **Spring Security + JWT** para proteger el acceso a su
 - **Bean Validation (Jakarta)** – Validaciones con anotaciones `@Valid`, `@NotBlank`, `@Size`, etc.
 - **Insomnia** – Pruebas de endpoints REST.
 - **ChatGPT** – Asistencia para documentación, lógica y planificación de mejoras.
+- **Swagger / OpenAPI** con `springdoc-openapi-starter-webmvc-ui` **2.8.9** - para documentación y pruebas.
+- **Maven Wrapper (mvnw)** - para builds reproducibles sin requerir Maven global.
+- **Spring Boot Maven Plugin** - para repackage del JAR ejecutable.
 
 ## 📌 Estado Actual
 
@@ -119,6 +192,11 @@ Ahora Libralia cuenta con **Spring Security + JWT** para proteger el acceso a su
 ✅ Validaciones robustas con mensajes personalizados  
 ✅ Optimización de consultas en base de datos  
 ✅ API asegurada con autenticación para proteger los datos del usuario  
+✅ Documentación auto-generada con Swagger y disponible en `/swagger-ui/index.html`.
+✅ Build reproducible con `./mvnw -DskipTests clean package` y ejecución por `JAR`.
+✅ Perfiles `dev` (H2) y `prod` (PostgreSQL) con configuración vía variables de entorno.
+✅ Swagger liberado en seguridad para facilitar pruebas (endpoints protegidos siguen con `JWT`).
+✅ API lista para ejecutar en cualquier equipo con Java 21.
 
 ---
 
